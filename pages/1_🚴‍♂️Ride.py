@@ -18,19 +18,12 @@ with container:
 
 st.divider()
 
-cell_width = 300
-cell_height = 300
+df = pd.read_csv('./data/strava-activities.csv')
+rides = df.loc[df['sport_type'] == 'Ride']
 
-col1, col2, col3 = st.columns(3)
+col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown('### Ride Activities')
-    df = pd.read_csv('./data/strava-activities.csv')
-    rides = df.loc[df['sport_type'] == 'Ride']
-    st.dataframe(rides)
-    st.divider()
-
-with col2:
     st.markdown('### Cumaltive Miles YTD By Month')
     rides_ytd = rides.loc[rides['start_date'] >= '2023-01-01']
     rides_ytd_distances = rides_ytd[['start_date','distance']]
@@ -44,7 +37,7 @@ with col2:
     st.line_chart(rides_ytd_distances, x='start_date', y='cumsum')
     st.divider()
 
-with col3:
+with col2:
     st.markdown('### Year To Date Metrics')
     col1, col2, col3 = st.columns(3)
     total_rides_ytd = rides_ytd.shape[0]
@@ -55,3 +48,17 @@ with col3:
     longest_ride_distance = int(round(longest_ride_ytd['distance'], 0))
     col3.metric("Longest Ride YTD", str(longest_ride_distance) + ' mi')
     st.divider()
+    st.markdown('### All Time Metrics')
+    col1, col2, col3 = st.columns(3)
+    total_rides = rides.shape[0]
+    col1.metric("Rides", str(total_rides))
+    total_distance = int(round(rides['distance'].sum(), 0))
+    col2.metric("Distance", str(total_distance) + ' mi')
+    longest_ride = rides.loc[rides['distance'].idxmax()]
+    longest_ride_distance_at = int(round(longest_ride['distance'], 0))
+    col3.metric("Longest Ride", str(longest_ride_distance_at) + ' mi')
+    st.divider()
+
+st.markdown('### Ride Activities')
+st.dataframe(rides)
+st.divider()

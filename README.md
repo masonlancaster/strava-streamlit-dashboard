@@ -6,5 +6,5 @@ This application connects to the strava API, pulls down a csv file containing al
 **Streamlit Documentation**: https://docs.streamlit.io.  
 
 <p align="center">
-  <img src="Road_Bike_Dasboard_Screenshot.png" width="350" title="hover text">
+  <img src="strava-streamlit-dashboard/Road_Bike_Dashboard_Screenshot.png" width="350" title="hover text">
 </p>

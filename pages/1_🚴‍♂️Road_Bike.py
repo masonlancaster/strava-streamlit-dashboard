@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 st.set_page_config(
-    page_title = 'Ride',
+    page_title = 'Road Bike',
     layout='wide',
     initial_sidebar_state='auto'
 )
@@ -14,7 +14,7 @@ with container:
     with col1:
         st.image('./img/strava-logo-ride.jpg')
     with col2:
-        st.title('Ride')
+        st.title('Road Bike')
 
 st.divider()
 
